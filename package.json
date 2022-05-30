@@ -25,6 +25,9 @@
     "husky": "^7.0.0"
   },
   "scripts": {
-    "prepare": "husky install"
+    "start": "node src",
+    "prepare": "husky install",
+    "test": "jest --watchAll=false --passWithNoTests",
+    "test-coverage": "npm run test -- --coverage --watchAll=false --passWithNoTests"
   }
 }
