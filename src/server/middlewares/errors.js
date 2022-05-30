@@ -1,6 +1,12 @@
 require("dotenv").config();
 const debug = require("debug")("japanthings:server:middlewares:errors");
 const chalk = require("chalk");
+const customError = require("../../utils/customError");
+
+const notFoundError = (req, res, next) => {
+  const error = customError(404, "Endpoint not found");
+  next(error);
+};
 
 // eslint-disable-next-line no-unused-vars
 const generalError = (error, req, res, next) => {
@@ -11,4 +17,4 @@ const generalError = (error, req, res, next) => {
   res.status(statusCode).json({ error: true, message });
 };
 
-module.exports = generalError;
+module.exports = { generalError, notFoundError };
