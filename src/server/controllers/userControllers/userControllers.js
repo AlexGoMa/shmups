@@ -19,7 +19,7 @@ const registerUser = async (req, res, next) => {
       res.status(201).json({ user: name });
     } else {
       const userError = new Error();
-      userError.customMessage = "User name already exist";
+      userError.customMessage = "User name already exists";
       userError.statusCode = 409;
       next(userError);
     }
