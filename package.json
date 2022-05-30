@@ -27,7 +27,7 @@
   "scripts": {
     "start": "node src",
     "prepare": "husky install",
-    "test": "jest --watchAll=false",
-    "test-coverage": "npm run test -- --coverage --watchAll=false"
+    "test": "jest --watchAll=false --passWithNoTests",
+    "test-coverage": "npm run test -- --coverage --watchAll=false --passWithNoTests"
   }
 }
