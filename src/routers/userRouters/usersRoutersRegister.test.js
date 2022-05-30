@@ -28,7 +28,7 @@ describe("Given a POST '/register' endpoint", () => {
     test("Then it should receive the created user object", async () => {
       const newUserData = {
         username: "paco",
-        password: "paco",
+        password: "1234",
         name: "paco",
       };
 
