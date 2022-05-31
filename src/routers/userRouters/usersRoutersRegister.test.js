@@ -8,14 +8,14 @@ const app = require("../../server");
 
 let mongoServer;
 
+const newUserData = {
+  name: "Marta",
+  username: "Marta",
+  password: "1234",
+};
 beforeAll(async () => {
   mongoServer = await MongoMemoryServer.create();
-
   await connectDB(mongoServer.getUri());
-});
-
-afterEach(async () => {
-  await User.deleteMany({});
 });
 
 afterAll(async () => {
@@ -26,18 +26,25 @@ afterAll(async () => {
 describe("Given a POST '/register' endpoint", () => {
   describe("When it receives a request", () => {
     test("Then it should receive the created user object", async () => {
-      const newUserData = {
-        username: "paco",
-        password: "1234",
-        name: "paco",
-      };
-
       const { body } = await request(app)
         .post("/user/register")
         .send(newUserData)
         .expect(201);
 
       expect(body.user).toBe(newUserData.name);
+    });
+  });
+
+  describe("When it receives a request to register a username already created", () => {
+    test("Then it should receive an error with a 409 in json", async () => {
+      const { body } = await request(app)
+        .post("/user/register")
+        .send(newUserData)
+        .expect(409);
+
+      const expectedMessage = "User name already exists";
+
+      expect(body.message).toBe(expectedMessage);
     });
   });
 });
