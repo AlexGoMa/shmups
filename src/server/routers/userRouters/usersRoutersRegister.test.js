@@ -2,8 +2,9 @@ const request = require("supertest");
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
 
-const connectDB = require("../../../database");
-const app = require("../../server");
+const connectDB = require("../../../../database");
+const app = require("../..");
+const User = require("../../../../database/models/User");
 
 let mongoServer;
 
@@ -18,6 +19,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await User.deleteMany({});
   await mongoServer.stop();
   await mongoose.connection.close();
 });

@@ -30,8 +30,8 @@
     "start": "node src",
     "start-dev": "nodemon src -q",
     "prepare": "husky install",
-    "test": "jest --passWithNoTests",
-    "test-coverage": "jest --coverage --watchAll=false"
+    "test": "jest",
+    "test-coverage": "jest --coverage --watchAll=false "
   },
   "jest": {
     "collectCoverageFrom": [
