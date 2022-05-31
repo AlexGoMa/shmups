@@ -55,7 +55,7 @@ describe("Given a post user/login endpoint ", () => {
     });
   });
 
-  describe("When it receibes a request with a wrong password", () => {
+  describe("When it receives a request with a wrong password", () => {
     test("Then it should return an error 403", async () => {
       const wrongPassword = {
         name: "Marta",

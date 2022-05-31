@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const connectDB = require("../../../../database");
 const app = require("../..");
+const User = require("../../../../database/models/User");
 
 let mongoServer;
 
@@ -18,6 +19,7 @@ beforeAll(async () => {
 });
 
 afterAll(async () => {
+  await User.deleteMany({});
   await mongoServer.stop();
   await mongoose.connection.close();
 });
