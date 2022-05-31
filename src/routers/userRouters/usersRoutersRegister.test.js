@@ -3,7 +3,6 @@ const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
 
 const connectDB = require("../../../database");
-const User = require("../../../database/models/User");
 const app = require("../../server");
 
 let mongoServer;
