@@ -14,6 +14,13 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  messages: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Message",
+      default: [],
+    },
+  ],
 });
 
 const User = model("User", UserSchema, "users");
