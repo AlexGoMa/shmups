@@ -16,6 +16,8 @@ const corsOptions = {
     "http://localhost:4001",
     "http://localhost:4002",
     "http://localhost:4003",
+    "https://alex-gomez-front-final-project-202204-bcn.netlify.app/register",
+    "https://alex-gomez-front-final-project-202204-bcn.netlify.app/register/",
   ],
 };
 
