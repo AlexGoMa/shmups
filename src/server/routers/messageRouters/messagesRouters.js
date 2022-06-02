@@ -4,6 +4,6 @@ const getMessages = require("../../controllers/userControllers/messagesControlle
 
 const messagesRouters = express.Router();
 
-messagesRouters.post("/list", getMessages);
+messagesRouters.get("/list", getMessages);
 
 module.exports = messagesRouters;
