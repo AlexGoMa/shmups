@@ -7,7 +7,7 @@ const getMessages = async (req, res, next) => {
     res.status(200).json({ messages });
   } else {
     const userError = new Error();
-    userError.customMessage = "No messages in the BD";
+    userError.customMessage = "No messages in the DB";
     userError.statusCode = 400;
     next(userError);
   }
