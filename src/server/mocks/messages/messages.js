@@ -1,4 +1,4 @@
-const mockedMessage = {
+const mockedMessages = {
   messages: [
     {
       fans: [],
@@ -12,4 +12,4 @@ const mockedMessage = {
   ],
 };
 
-exports.module = mockedMessage;
+module.exports = { mockedMessages };
