@@ -32,7 +32,7 @@ describe("Given a POST '/register' endpoint", () => {
         .send(newUserData)
         .expect(201);
 
-      expect(body.user).toBe(newUserData.name);
+      expect(body.username).toBe(newUserData.username);
     });
   });
 
