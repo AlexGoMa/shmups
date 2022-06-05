@@ -1,6 +1,6 @@
 const { Joi } = require("express-validation");
 
-const credentialsRegisterSchema = {
+const userRegisterSchema = {
   body: Joi.object({
     name: Joi.string()
       .max(20)
@@ -17,4 +17,17 @@ const credentialsRegisterSchema = {
   }),
 };
 
-module.exports = credentialsRegisterSchema;
+const messageRegisterSchema = {
+  body: Joi.object({
+    text: Joi.string()
+      .max(60)
+      .messages({ message: "Text is required" })
+      .required(),
+    category: Joi.string()
+      .max(20)
+      .messages({ message: "Category is required" })
+      .required(),
+  }),
+};
+
+module.exports = { userRegisterSchema, messageRegisterSchema };
