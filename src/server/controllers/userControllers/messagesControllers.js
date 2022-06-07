@@ -31,4 +31,21 @@ const deleteMessage = async (req, res, next) => {
   }
 };
 
-module.exports = { getMessages, deleteMessage };
+const createMessage = async (req, res, next) => {
+  const { text, image, category, id } = req.body;
+  try {
+    const newMessage = {
+      text,
+      image,
+      category,
+      author: id,
+    };
+
+    await Message.create(newMessage);
+    res.status(201).json({ newMessage });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { getMessages, deleteMessage, createMessage };
