@@ -20,7 +20,7 @@ const userRegisterSchema = {
 const messageRegisterSchema = {
   body: Joi.object({
     text: Joi.string()
-      .max(60)
+      .max(240)
       .messages({ message: "Text is required" })
       .required(),
     category: Joi.string()
