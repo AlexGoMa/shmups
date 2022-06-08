@@ -13,6 +13,22 @@ const getMessages = async (req, res, next) => {
   }
 };
 
+const getUserMessages = async (req, res, next) => {
+  const { id } = req.body;
+  const messages = await Message.find().populate({
+    path: "author",
+    match: { id: { id } },
+  });
+  if (messages.length !== 0) {
+    res.status(200).json({ messages });
+  } else {
+    const userError = new Error();
+    userError.customMessage = "No messages in the DB";
+    userError.statusCode = 400;
+    next(userError);
+  }
+};
+
 const deleteMessage = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -48,4 +64,4 @@ const createMessage = async (req, res, next) => {
   }
 };
 
-module.exports = { getMessages, deleteMessage, createMessage };
+module.exports = { getMessages, getUserMessages, deleteMessage, createMessage };

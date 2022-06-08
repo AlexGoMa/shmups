@@ -1,4 +1,8 @@
-const { getMessages, deleteMessage } = require("./messagesControllers");
+const {
+  getMessages,
+  getUserMessages,
+  deleteMessage,
+} = require("./messagesControllers");
 const Message = require("../../../../database/models/Message");
 const { mockedMessages } = require("../../mocks/messages/messages");
 
@@ -82,6 +86,30 @@ describe("Given a deleteMessage middleware ", () => {
       await deleteMessage(null, res, next);
 
       expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a getUserMessages controller", () => {
+  const res = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  };
+
+  describe("When it's invoked with a request", () => {
+    test("Then it should return a 200 and messages in the body", async () => {
+      const req = { body: { id: "121212" } };
+
+      Message.find = jest.fn(() => ({
+        populate: jest.fn().mockResolvedValue(mockedMessages),
+      }));
+
+      const expectedStatus = 200;
+
+      await getUserMessages(req, res);
+
+      expect(res.status).toHaveBeenCalledWith(expectedStatus);
+      expect(res.json).toHaveBeenCalledWith({ messages: mockedMessages });
     });
   });
 });
