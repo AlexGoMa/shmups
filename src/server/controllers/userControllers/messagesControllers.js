@@ -1,4 +1,5 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const Message = require("../../../../database/models/Message");
 
 const getMessages = async (req, res, next) => {
@@ -14,7 +15,10 @@ const getMessages = async (req, res, next) => {
 };
 
 const getUserMessages = async (req, res, next) => {
-  const { username } = req.body;
+  const { authorization } = req.headers;
+  const token = authorization.replace("Bearer ", "");
+  const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
   const messages = await Message.find({ author: username });
   if (messages.length !== 0) {
     res.status(200).json({ messages });
