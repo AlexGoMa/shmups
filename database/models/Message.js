@@ -13,8 +13,8 @@ const MessageSchema = new Schema({
     type: String,
     required: true,
   },
-  author: { type: Schema.Types.ObjectId, ref: "User", required: true },
-  fans: [{ type: Schema.Types.ObjectId, ref: "User", default: [] }],
+  author: { type: Schema.Types.String, ref: "User", required: true },
+  fans: [{ type: Schema.Types.String, ref: "User", default: [] }],
 });
 
 const Message = model("Message", MessageSchema, "messages");
