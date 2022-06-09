@@ -48,13 +48,13 @@ const deleteMessage = async (req, res, next) => {
 };
 
 const createMessage = async (req, res, next) => {
-  const { text, image, category, id } = req.body;
+  const { text, image, category, username } = req.body;
   try {
     const newMessage = {
       text,
       image,
       category,
-      author: id,
+      author: username,
     };
 
     await Message.create(newMessage);
