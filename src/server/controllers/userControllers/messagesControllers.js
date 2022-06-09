@@ -14,11 +14,8 @@ const getMessages = async (req, res, next) => {
 };
 
 const getUserMessages = async (req, res, next) => {
-  const { id } = req.body;
-  const messages = await Message.find().populate({
-    path: "author",
-    match: { id: { id } },
-  });
+  const { username } = req.body;
+  const messages = await Message.find({ author: username });
   if (messages.length !== 0) {
     res.status(200).json({ messages });
   } else {
