@@ -1,4 +1,6 @@
 require("dotenv").config();
+const fs = require("fs");
+const path = require("path");
 const jwt = require("jsonwebtoken");
 const Message = require("../../../../database/models/Message");
 
@@ -49,13 +51,28 @@ const deleteMessage = async (req, res, next) => {
 };
 
 const createMessage = async (req, res, next) => {
-  const { text, image, category, username } = req.body;
   try {
+    const { text, category, username } = req.body;
+    const { file } = req;
+    const newImageName = file ? `${Date.now()}${file.originalname}` : "";
+
+    if (file) {
+      fs.rename(
+        path.join("uploads", "images", file.filename),
+        path.join("uploads", "images", newImageName),
+        async (error) => {
+          if (error) {
+            next(error);
+          }
+        }
+      );
+    }
+
     const newMessage = {
       text,
-      image,
       category,
       author: username,
+      image: file ? path.join("images", newImageName) : "",
     };
 
     await Message.create(newMessage);
