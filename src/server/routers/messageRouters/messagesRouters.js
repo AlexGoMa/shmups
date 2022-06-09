@@ -13,8 +13,8 @@ const messagesRouters = express.Router();
 
 messagesRouters.get("/list", auth, getMessages);
 messagesRouters.delete("/:id", auth, deleteMessage);
-messagesRouters.post("/create", auth, createMessage);
 
-messagesRouters.get("/mymessages", auth, getUserMessages);
+messagesRouters.get("/mine", auth, getUserMessages);
+messagesRouters.post("/mine/create", auth, createMessage);
 
 module.exports = messagesRouters;
