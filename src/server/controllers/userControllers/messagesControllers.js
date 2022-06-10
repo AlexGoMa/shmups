@@ -16,6 +16,24 @@ const getMessages = async (req, res, next) => {
   }
 };
 
+const getOneMessage = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const result = await Message.findOne(id);
+    if (!result) {
+      const userError = new Error();
+      userError.customMessage = "Message not found in the DB";
+      userError.statusCode = 404;
+      next(userError);
+    }
+    res.status(200).json({ message: "Message found!" });
+  } catch (error) {
+    error.customMessage = "Bad request";
+    error.statusCode = 500;
+    next(error);
+  }
+};
+
 const getUserMessages = async (req, res, next) => {
   const { authorization } = req.headers;
   const token = authorization.replace("Bearer ", "");
@@ -86,4 +104,10 @@ const createMessage = async (req, res, next) => {
   }
 };
 
-module.exports = { getMessages, getUserMessages, deleteMessage, createMessage };
+module.exports = {
+  getMessages,
+  getOneMessage,
+  getUserMessages,
+  deleteMessage,
+  createMessage,
+};
