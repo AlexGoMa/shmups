@@ -17,6 +17,9 @@ const messagesRouters = express.Router();
 
 const upload = multer({
   dest: path.join("uploads", "images"),
+  limits: {
+    fieldSize: 1024 * 1024,
+  },
 });
 
 messagesRouters.get("/list", auth, getMessages);
