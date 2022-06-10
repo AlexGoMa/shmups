@@ -9,6 +9,10 @@ const MessageSchema = new Schema({
     type: String,
     required: false,
   },
+  // imageBackup: {
+  //  type: String,
+  //  required: false,
+  // },
   category: {
     type: String,
     required: true,
