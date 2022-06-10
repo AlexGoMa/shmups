@@ -1,7 +1,7 @@
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const path = require("path");
-const jwt = require("jsonwebtoken");
 const Message = require("../../../../database/models/Message");
 
 const getMessages = async (req, res, next) => {
@@ -19,7 +19,7 @@ const getMessages = async (req, res, next) => {
 const getOneMessage = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const result = await Message.findOne(id);
+    const result = await Message.findOne({ id });
     if (!result) {
       const userError = new Error();
       userError.customMessage = "Message not found in the DB";
@@ -71,6 +71,7 @@ const deleteMessage = async (req, res, next) => {
 const createMessage = async (req, res, next) => {
   try {
     const { text, category } = req.body;
+    // const { img, imgBackup } = req;
     const { file } = req;
 
     const { authorization } = req.headers;
@@ -95,7 +96,9 @@ const createMessage = async (req, res, next) => {
       text,
       category,
       author: username,
-      image: newImageName,
+      image: newImageName, //
+      // image: img,
+      // imageBackup: imgBackup,
     };
     await Message.create(newMessage);
     res.status(201).json({ newMessage });
