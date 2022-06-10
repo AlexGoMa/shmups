@@ -52,8 +52,13 @@ const deleteMessage = async (req, res, next) => {
 
 const createMessage = async (req, res, next) => {
   try {
-    const { text, category, username } = req.body;
+    const { text, category } = req.body;
     const { file } = req;
+
+    const { authorization } = req.headers;
+    const token = authorization.replace("Bearer ", "");
+    const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
     const newImageName = file ? `${Date.now()}${file.originalname}` : "";
 
     if (file) {
@@ -72,9 +77,8 @@ const createMessage = async (req, res, next) => {
       text,
       category,
       author: username,
-      image: file ? path.join("images", newImageName) : "",
+      image: newImageName,
     };
-
     await Message.create(newMessage);
     res.status(201).json({ newMessage });
   } catch (error) {
