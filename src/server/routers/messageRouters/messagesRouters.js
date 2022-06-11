@@ -10,6 +10,7 @@ const {
   createMessage,
   getUserMessages,
   getOneMessage,
+  updateMessage,
 } = require("../../controllers/userControllers/messagesControllers");
 
 const { auth } = require("../../middlewares/auth");
@@ -27,6 +28,7 @@ const upload = multer({
 messagesRouters.get("/list", auth, getMessages);
 messagesRouters.delete("/:id", auth, deleteMessage);
 messagesRouters.get("/one/:id", auth, getOneMessage);
+messagesRouters.put("/update/:id", auth, updateMessage);
 
 messagesRouters.get("/mine", auth, getUserMessages);
 messagesRouters.post(
