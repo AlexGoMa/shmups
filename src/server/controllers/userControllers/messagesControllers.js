@@ -72,37 +72,45 @@ const createMessage = async (req, res, next) => {
   try {
     const { text, category } = req.body;
     const { img, imgBackup } = req;
-    // const { file } = req;
 
     const { authorization } = req.headers;
     const token = authorization.replace("Bearer ", "");
     const { username } = jwt.verify(token, process.env.JWT_SECRET);
 
-    // const newImageName = file ? `${Date.now()}${file.originalname}` : "";
-
-    /*
-    if (file) {
-      fs.rename(
-        path.join("uploads", "images", file.filename),
-        path.join("uploads", "images", newImageName),
-        async (error) => {
-          if (error) {
-            next(error);
-          }
-        }
-      );
-    }
-  */
     const newMessage = {
       text,
       category,
       author: username,
-      // image: newImageName, //
       image: img,
       imageBackup: imgBackup,
     };
     await Message.create(newMessage);
     res.status(201).json({ newMessage });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateMessage = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { text, category } = req.body;
+    const { img, imgBackup } = req.body;
+    const { authorization } = req.headers;
+    const token = authorization.replace("Bearer ", "");
+    const { username } = jwt.verify(token, process.env.JWT_SECRET);
+
+    const newMessage = {
+      id,
+      text,
+      category,
+      author: username,
+      image: img,
+      imageBackup: imgBackup,
+    };
+
+    const updatedMessage = await Message.findOneAndUpdate(id, newMessage);
+    res.status(201).json({ message: updatedMessage });
   } catch (error) {
     next(error);
   }
@@ -114,4 +122,5 @@ module.exports = {
   getUserMessages,
   deleteMessage,
   createMessage,
+  updateMessage,
 };
