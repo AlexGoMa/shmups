@@ -13,7 +13,7 @@ const {
 } = require("../../controllers/userControllers/messagesControllers");
 
 const { auth } = require("../../middlewares/auth");
-// const firebase = require("../../middlewares/firebase"); //
+const firebase = require("../../middlewares/firebase"); //
 
 const messagesRouters = express.Router();
 
@@ -33,7 +33,7 @@ messagesRouters.post(
   "/mine/create",
   auth,
   upload.single("image"),
-  // firebase,
+  firebase,
   createMessage
 );
 

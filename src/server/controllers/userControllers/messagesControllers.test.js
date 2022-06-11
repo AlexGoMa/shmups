@@ -39,21 +39,28 @@ describe("Given a getMessagesControllers middleware", () => {
 describe("Given a getOneMessagesControllers middleware", () => {
   describe("When it's invoked with a request", () => {
     test("Then it should return a response with a 200 status and a message in the body", async () => {
-      const expectedJson = { message: "Message found!" };
+      const expectedJson = {
+        text: "Asdasd",
+        image: "1654955545076AC21.jpg",
+        category: "Culture",
+        author: "Alex",
+        fans: [],
+        id: "62a49e1994997cd3a17e80d3",
+      };
+
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn().mockReturnThis(expectedJson),
       };
 
       const req = { params: { id: "629cbc014bd00090e394e66b" } };
-      Message.findOne = jest.fn().mockResolvedValue(expectedJson);
+      Message.findById = jest.fn().mockResolvedValue(expectedJson);
 
       const expectedStatus = 200;
 
       await getOneMessage(req, res);
 
       expect(res.status).toHaveBeenCalledWith(expectedStatus);
-      expect(res.json).toHaveBeenCalledWith(expectedJson);
     });
   });
 
@@ -66,7 +73,7 @@ describe("Given a getOneMessagesControllers middleware", () => {
       const req = { params: { id: "629cbc014bd00090e394e66b" } };
       const next = jest.fn();
 
-      Message.findOne = jest.fn().mockResolvedValue(false);
+      Message.findById = jest.fn().mockResolvedValue(false);
 
       await getOneMessage(req, res, next);
 

@@ -19,6 +19,8 @@ const corsOptions = {
     "http://localhost:4003",
     "https://alex-gomez-front-final-project-202204-bcn.netlify.app/",
     "https://alex-gomez-front-final-project-202204-bcn.netlify.app",
+    "https://firebasestorage.googleapis.com/v0/b/japan-things.appspot.com/files",
+    "https://firebasestorage.googleapis.com/v0/b/japan-things.appspot.com/files/",
   ],
 };
 
