@@ -28,7 +28,13 @@ const upload = multer({
 messagesRouters.get("/list", auth, getMessages);
 messagesRouters.delete("/:id", auth, deleteMessage);
 messagesRouters.get("/one/:id", auth, getOneMessage);
-messagesRouters.put("/update/:id", auth, updateMessage);
+messagesRouters.put(
+  "/update/:id",
+  auth,
+  upload.single("image"),
+  firebase,
+  updateMessage
+);
 
 messagesRouters.get("/mine", auth, getUserMessages);
 messagesRouters.post(
