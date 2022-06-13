@@ -94,8 +94,7 @@ const createMessage = async (req, res, next) => {
 const updateMessage = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { text, category } = req.body;
-    const { img, imgBackup } = req.body;
+    const { text, category, img, imgBackup } = req.body;
     const { authorization } = req.headers;
     const token = authorization.replace("Bearer ", "");
     const { username } = jwt.verify(token, process.env.JWT_SECRET);
@@ -109,8 +108,10 @@ const updateMessage = async (req, res, next) => {
       imageBackup: imgBackup,
     };
 
-    const updatedMessage = await Message.findOneAndUpdate(id, newMessage);
-    res.status(201).json({ message: updatedMessage });
+    await Message.findByIdAndUpdate(id, newMessage, {
+      new: true,
+    });
+    res.status(201).json({ newMessage });
   } catch (error) {
     next(error);
   }

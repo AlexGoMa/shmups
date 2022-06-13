@@ -12,7 +12,6 @@ const path = require("path");
 
 const firebase = async (req, res, next) => {
   const { file } = req;
-
   const firebaseConfig = {
     apiKey: "AIzaSyCHAaD5z2btRqmCjMATCHc45RS8-G4MRK8",
     authDomain: "japan-things.firebaseapp.com",
