@@ -11,6 +11,7 @@ const {
   getUserMessages,
   getOneMessage,
   updateMessage,
+  getMessagesByCategory,
 } = require("../../controllers/userControllers/messagesControllers");
 
 const { auth } = require("../../middlewares/auth");
@@ -26,8 +27,10 @@ const upload = multer({
 });
 
 messagesRouters.get("/list", auth, getMessages);
-messagesRouters.delete("/:id", auth, deleteMessage);
+messagesRouters.get("/category/:category", auth, getMessagesByCategory);
+messagesRouters.get("/mine", auth, getUserMessages);
 messagesRouters.get("/one/:id", auth, getOneMessage);
+messagesRouters.delete("/:id", auth, deleteMessage);
 messagesRouters.put(
   "/update/:id",
   auth,
@@ -36,7 +39,6 @@ messagesRouters.put(
   updateMessage
 );
 
-messagesRouters.get("/mine", auth, getUserMessages);
 messagesRouters.post(
   "/mine/create",
   auth,

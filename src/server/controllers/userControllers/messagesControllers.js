@@ -16,6 +16,19 @@ const getMessages = async (req, res, next) => {
   }
 };
 
+const getMessagesByCategory = async (req, res, next) => {
+  const { category } = req.params;
+  const messages = await Message.find({ category });
+  if (messages.length !== 0) {
+    res.status(200).json({ messages });
+  } else {
+    const userError = new Error();
+    userError.customMessage = "No messages in the DB";
+    userError.statusCode = 400;
+    next(userError);
+  }
+};
+
 const getOneMessage = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -119,6 +132,7 @@ const updateMessage = async (req, res, next) => {
 
 module.exports = {
   getMessages,
+  getMessagesByCategory,
   getOneMessage,
   getUserMessages,
   deleteMessage,
