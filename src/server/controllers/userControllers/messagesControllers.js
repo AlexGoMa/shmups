@@ -1,7 +1,5 @@
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
-// const fs = require("fs");
-// const path = require("path");
 const Message = require("../../../../database/models/Message");
 
 const getMessages = async (req, res, next) => {
@@ -107,24 +105,29 @@ const createMessage = async (req, res, next) => {
 const updateMessage = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const { text, category, img, imgBackup } = req.body;
-    const { authorization } = req.headers;
-    const token = authorization.replace("Bearer ", "");
-    const { username } = jwt.verify(token, process.env.JWT_SECRET);
+    const messageBody = req.body;
+    const { file, img, imgBackup } = req;
+    const currentMessage = await Message.findById(id);
 
-    const newMessage = {
-      id,
-      text,
-      category,
-      author: username,
-      image: img,
-      imageBackup: imgBackup,
-    };
-
-    await Message.findByIdAndUpdate(id, newMessage, {
-      new: true,
-    });
-    res.status(201).json({ newMessage });
+    if (!file) {
+      const updatedMessage = {
+        ...messageBody,
+        author: currentMessage.author,
+        image: currentMessage.image,
+        imageBackup: currentMessage.imageBackup,
+      };
+      const newMessage = await Message.findByIdAndUpdate(id, updatedMessage);
+      res.status(201).json({ newMessage });
+    } else {
+      const updatedMessage = {
+        ...messageBody,
+        author: currentMessage.author,
+        image: img,
+        imageBackup: imgBackup,
+      };
+      const newMessage = await Message.findByIdAndUpdate(id, updatedMessage);
+      res.status(201).json({ newMessage });
+    }
   } catch (error) {
     next(error);
   }
