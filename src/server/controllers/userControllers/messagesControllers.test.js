@@ -3,7 +3,6 @@ const {
   getOneMessage,
   deleteMessage,
   getMessagesByCategory,
-  getUserMessages,
 } = require("./messagesControllers");
 const Message = require("../../../../database/models/Message");
 const { mockedMessages } = require("../../mocks/messages/messages");
