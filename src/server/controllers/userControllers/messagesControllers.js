@@ -71,7 +71,7 @@ const deleteMessage = async (req, res, next) => {
       userError.statusCode = 404;
       next(userError);
     }
-    res.status(200).json({ message: "Message deleted correctly!" });
+    res.status(200).json({ message: "Message has been deleted!" });
   } catch (error) {
     error.customMessage = "Bad request";
     error.statusCode = 500;

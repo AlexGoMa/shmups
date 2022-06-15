@@ -139,7 +139,7 @@ describe("Given a getOneMessagesControllers middleware", () => {
 describe("Given a deleteMessage middleware ", () => {
   describe("When it's invoked with a request", () => {
     test("Then it should return a response with a 200 status and the object in json", async () => {
-      const expectedJson = { message: "Message deleted correctly!" };
+      const expectedJson = { message: "Message has been deleted!" };
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn().mockReturnThis(expectedJson),
