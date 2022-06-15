@@ -6,7 +6,7 @@ const mockedMessages = {
       image:
         "https://upload.wikimedia.org/wikipedia/commons/8/8f/ItsukushimaTorii7379.jpg",
       category: "Locations",
-      author: "6299c0db6295e753b6bdc901",
+      author: "Luis",
       id: "6299c1084bd00090e394e654",
     },
   ],
