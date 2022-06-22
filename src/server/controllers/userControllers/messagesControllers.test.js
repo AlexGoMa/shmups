@@ -138,7 +138,7 @@ describe("Given a getOneMessagesControllers middleware", () => {
 
 describe("Given a deleteMessage middleware ", () => {
   describe("When it's invoked with a request", () => {
-    test("Then it should return a response with a 200 status and the object in json", async () => {
+    test("Then it should return a response with a 200 status and a message in the json", async () => {
       const expectedJson = { message: "Message has been deleted!" };
       const res = {
         status: jest.fn().mockReturnThis(),
@@ -158,9 +158,9 @@ describe("Given a deleteMessage middleware ", () => {
   });
 
   describe("When it's called with a request and the id doesn't exist in the BD", () => {
-    test("Then it should call the next function 'with an error 400' ", async () => {
+    test("Then it should call the next function", async () => {
       const res = {
-        status: jest.fn().mockReturnThis(),
+        status: jest.fn(),
         json: jest.fn(),
       };
       const req = { params: { id: "629cbc014bd00090e394e66b" } };
@@ -175,7 +175,7 @@ describe("Given a deleteMessage middleware ", () => {
   });
 
   describe("When it's invoked with a bad request", () => {
-    test("Then it should call the next function 'with an error 500 '", async () => {
+    test("Then it should call the next function", async () => {
       const res = {
         status: jest.fn().mockReturnThis(),
         json: jest.fn(),
