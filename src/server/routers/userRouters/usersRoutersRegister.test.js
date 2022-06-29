@@ -18,8 +18,11 @@ beforeAll(async () => {
   await connectDB(mongoServer.getUri());
 });
 
-afterAll(async () => {
+beforeEach(async () => {
   await User.deleteMany({});
+});
+
+afterAll(async () => {
   await mongoServer.stop();
   await mongoose.connection.close();
 });
@@ -38,6 +41,8 @@ describe("Given a POST '/register' endpoint", () => {
 
   describe("When it receives a request to register a username already created", () => {
     test("Then it should receive an error with a 409 in json", async () => {
+      await request(app).post("/user/register").send(newUserData);
+
       const { body } = await request(app)
         .post("/user/register")
         .send(newUserData)
