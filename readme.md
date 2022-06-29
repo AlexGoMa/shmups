@@ -2,11 +2,17 @@
 
 ## Endpoints:
 
-- user/login
-- user/register
+### User endpoints:
 
-- message/
-- message/create
-- message/:messageId
-- message/delete/:messageId
-- message/update/:messageId
+- user/login (POST) - Authenticate a user
+- user/register (POST) - Create a new user
+
+### Messages endpoints:
+
+- message/list (GET) - Get all messages
+- message/one/:id (GET) - Get detail of one message
+- message/mine (GET) - Get own messages
+- message/mine/create (POST) - Create a new message
+- message/:id (DELETE) - Delete a message
+- message/update/:id (PUT) - Update a message
+- message/category/:category (GET) - Get all messages by category
