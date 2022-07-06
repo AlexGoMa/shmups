@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("japanthings:root");
+const debug = require("debug")("shmups:root");
 const chalk = require("chalk");
 
 const connectDB = require("../database");

@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("japanthings:server:initializeServer");
+const debug = require("debug")("shmups:server:initializeServer");
 const chalk = require("chalk");
 const app = require(".");
 
