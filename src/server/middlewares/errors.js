@@ -1,5 +1,5 @@
 require("dotenv").config();
-const debug = require("debug")("japanthings:server:middlewares:errors");
+const debug = require("debug")("shmups:server:middlewares:errors");
 const chalk = require("chalk");
 const customError = require("../../utils/customError");
 

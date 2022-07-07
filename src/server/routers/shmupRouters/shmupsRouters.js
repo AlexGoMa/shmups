@@ -3,7 +3,7 @@ const express = require("express");
 
 const {
   getShmups,
-} = require("../../controllers/userControllers/messagesControllers");
+} = require("../../controllers/shmupsControllers/shmupsControllers");
 
 const shmupsRouters = express.Router();
 
