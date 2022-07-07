@@ -1,4 +1,4 @@
-# Switch shmups database API rest
+# Switch shmups API rest
 
 - This project is an API rest that returns the list of physical shmup (shoot em up games) released in Nintendo Switch console.
 
@@ -13,27 +13,30 @@
 #### Info returned
 
 - `name` : Name of the game / compilation
-- `imgSquare` : Game art in 4:3 proportion, picture comes from url in nintendo.co.jp store
-- `imgWide` : Game art in 16:9 proportion, picture comes from url in nintendo.co.jp store
+- `imgSquare` : Game art in 1:1 proportion (346 x 346 resolution), picture comes from url in nintendo.co.jp store
+- `imgWide` : Game art in 16:9 proportion (1368 × 770 resolution), picture comes from url in nintendo.co.jp store
 - `screen` : Display orientation vertical/horizontal
 - `tate` : Boolean that determines if screen can be rotated to play vertical games in 3:4 / 9:16
 
-#### Format:
+#### Format returned in JSON:
 
 ```
-shmups = [
-
 {
-    name: "Game Name",
-    imgSquare: "url",
-    imgWide: "url",
-    screen: "horizontal",
-    tate: false,
-},
+  "shmups" = [
 
-{
+  {
+    "id":"GameId"
+    "name": "Game Name",
+    "imgSquare": "url",
+    "imgWide": "url",
+    "screen": "horizontal",
+    "tate": false,
+  },
+
+  {
     ...
-},
-];`
+  },
+  ];
+}`
 
 ```
