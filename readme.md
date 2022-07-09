@@ -2,7 +2,7 @@
 
 - This project is an API rest that returns the list of physical shmup (shoot em up games) released in Nintendo Switch console.
 
-- Idea is to store the list of all games in a Mongo database and save all the important info about them: display orientation, native resolution, action buttons, tricks, story, developer, publisher, stages, etc...
+- Idea is to store the list of all games in a Mongo database and save all the important info about them: name, display orientation, native resolution, action buttons, number of players, tricks, story, developer, publisher, stages, etc...
 
 ## Endpoints:
 
